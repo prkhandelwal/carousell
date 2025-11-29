@@ -10,4 +10,10 @@ Implements the Carousell marketplace CLI as per assignment spec.
 ## Build
 
 ```bash
-./build.sh
+sh ./build.sh
+```
+
+## Run
+```bash
+java -cp out com.carousell.marketplace.cli.Application
+```

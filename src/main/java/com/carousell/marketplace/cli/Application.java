@@ -36,11 +36,15 @@ public class Application {
                 continue;
             }
 
-            InputParser.ParsedInput parsed = InputParser.parse(line);
-            Command command = commandFactory.create(parsed.getCommandName(), parsed.getArgs());
-            CommandContext context = new CommandContext(service, System.out,
-                    parsed.getCommandName(), parsed.getArgs());
-            command.execute(context);
+            try {
+                InputParser.ParsedInput parsed = InputParser.parse(line);
+                Command command = commandFactory.create(parsed.getCommandName(), parsed.getArgs());
+                CommandContext context = new CommandContext(service, System.out,
+                        parsed.getCommandName(), parsed.getArgs());
+                command.execute(context);
+            } catch (Exception e) {
+                System.out.println("Error - internal error");
+            }
         }
     }
 }

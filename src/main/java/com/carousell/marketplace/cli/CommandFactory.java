@@ -7,6 +7,9 @@ public class CommandFactory {
     public Command create(final String commandName, final List<String> args) {
 
         if ("REGISTER".equalsIgnoreCase(commandName)) {
+            if (args.size() != 1) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -19,6 +22,9 @@ public class CommandFactory {
         }
 
         if ("CREATE_LISTING".equalsIgnoreCase(commandName)) {
+            if (args.size() != 5) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -36,6 +42,9 @@ public class CommandFactory {
         }
 
         if ("GET_LISTING".equalsIgnoreCase(commandName)) {
+            if (args.size() != 2) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -50,6 +59,9 @@ public class CommandFactory {
         }
 
         if ("DELETE_LISTING".equalsIgnoreCase(commandName)) {
+            if (args.size() != 2) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -64,6 +76,9 @@ public class CommandFactory {
         }
 
         if ("GET_CATEGORY".equalsIgnoreCase(commandName)) {
+            if (args.size() != 4) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -82,6 +97,9 @@ public class CommandFactory {
         }
 
         if ("GET_TOP_CATEGORY".equalsIgnoreCase(commandName)) {
+            if (args.size() != 1) {
+                return invalidArgumentsCommand();
+            }
             return new Command() {
                 @Override
                 public void execute(CommandContext context) {
@@ -98,6 +116,15 @@ public class CommandFactory {
             @Override
             public void execute(CommandContext context) {
                 context.getOut().println("Error - unknown command");
+            }
+        };
+    }
+
+    private Command invalidArgumentsCommand() {
+        return new Command() {
+            @Override
+            public void execute(CommandContext context) {
+                context.getOut().println("Error - invalid arguments");
             }
         };
     }
